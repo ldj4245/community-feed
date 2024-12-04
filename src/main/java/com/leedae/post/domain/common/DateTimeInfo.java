@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class DateTimeInfo {
 
-    private  boolean isEdited;
-    private  LocalDateTime dateTime;
+    private boolean isEdited;
+    private LocalDateTime dateTime;
 
     public DateTimeInfo() {
         this.isEdited = false;

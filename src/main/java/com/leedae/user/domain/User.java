@@ -13,6 +13,9 @@ public class User {
 
 
     public User(Long id, UserInfo userInfo) {
+        if(userInfo == null){
+            throw new IllegalArgumentException();
+        }
         this.id = id;
         this.info = userInfo;
         this.followingCount = new PositiveIntegerCounter();
@@ -47,6 +50,18 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public int followerCount(){
+        return followerCounter.getCount();
+    }
+
+    public int followingCount(){
+        return followingCount.getCount();
+    }
+
+    public UserInfo getInfo() {
+            return info;
     }
 
     @Override
