@@ -1,5 +1,6 @@
 package com.leedae.user.application;
 
+import com.leedae.fake.FakeObjectFactory;
 import com.leedae.user.application.dto.CreateUserRequestDto;
 import com.leedae.user.application.dto.FollowUserRequestDto;
 import com.leedae.user.application.interfaces.UserRelationRepository;
@@ -15,10 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserRelationServiceTest {
 
-    private final UserRepository userRepository = new FakeUserRepository();
-    private final UserService userService = new UserService(userRepository);
-    private final UserRelationRepository userRelationRepository = new FakeUserRelationRepository();
-    private final UserRelationService userRelationService = new UserRelationService(userService,userRelationRepository);
+    private final UserService userService = FakeObjectFactory.getUserService();
+    private final UserRelationService userRelationService = FakeObjectFactory.getUserRelationService();
+
 
     private User user1;
     private User user2;

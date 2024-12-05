@@ -1,5 +1,6 @@
 package com.leedae.user.application;
 
+import com.leedae.fake.FakeObjectFactory;
 import com.leedae.user.application.dto.CreateUserRequestDto;
 import com.leedae.user.application.interfaces.UserRepository;
 import com.leedae.user.domain.User;
@@ -12,8 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserServiceTest {
 
 
-    private final UserRepository userRepository = new FakeUserRepository();
-    private final UserService userService = new UserService(userRepository);
+    private final UserService userService = FakeObjectFactory.getUserService();
 
     @Test
     void givenUserInfo_whenCreateUser_thenCanFindUser(){
@@ -27,7 +27,7 @@ class UserServiceTest {
         //then
         User foundUser = userService.getUser(savedUser.getId());
         UserInfo userInfo = foundUser.getInfo();
-        assertEquals(foundUser.getInfo(), savedUser.getId());
+        assertEquals(foundUser.getId(), savedUser.getId());
         assertEquals("test",userInfo.getName());
 
 

@@ -9,9 +9,9 @@ public class UserRelationService {
     private final UserRelationRepository userRelationRepository;
 
 
-    public UserRelationService(UserService userService, UserRelationRepository userRelationRepository) {
-        this.userService = userService;
+    public UserRelationService(UserRelationRepository userRelationRepository,UserService userService) {
         this.userRelationRepository = userRelationRepository;
+        this.userService = userService;
     }
 
     public void follow(FollowUserRequestDto dto){
