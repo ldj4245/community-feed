@@ -16,11 +16,12 @@ public class FakeCommentRepository implements CommentRepository {
     public Comment save(Comment comment) {
         if(comment.getId() != null){
             store.put(comment.getId(), comment);
+            return comment;
         }
 
         long id = store.size()+1;
         Comment newComment = new Comment(id,comment.getPost(),comment.getAuthor(), comment.getContent());
-        store.put(id,comment);
+        store.put(id,newComment);
         return newComment;
     }
 

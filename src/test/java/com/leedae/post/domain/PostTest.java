@@ -20,7 +20,7 @@ class PostTest {
     @Test
     void givenPostCreated_whenLike_ThenLikeCountShouldBe1(){
         //when
-        post.like(user);
+        post.like(otherUser);
 
         //then
         assertEquals(1,post.getLikeCount());

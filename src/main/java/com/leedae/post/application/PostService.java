@@ -28,10 +28,10 @@ public class PostService {
 
     public Post createPost(CreatePostRequestDto dto){
 
-        User author = userService.getUser(dto.userId());
-        Content content = new PostContent(dto.content());
-        Post post = Post.createPost(null,author,dto.content(),dto.state());
-        return postRepository.save(post);
+        User author = userService.getUser(dto.userId()); //유저 여부 확인
+        Content content = new PostContent(dto.content()); //컨텐츠 검증 5자 이상이면 return 이거나 이러한 조건
+        Post post = Post.createPost(null,author,dto.content(),dto.state()); //게시글 생성
+        return postRepository.save(post); //db에 저장 이때 id가 저장됨
 
     }
 
@@ -44,14 +44,14 @@ public class PostService {
     }
 
     public void likePost(LikeRequestDto dto) {
-        Post post = postRepository.findById(dto.targetId()).orElseThrow();
-        User user = userService.getUser(dto.userId());
+        Post post = postRepository.findById(dto.targetId()).orElseThrow(); //게시글 존재 여부 확인
+        User user = userService.getUser(dto.userId()); //유저 존재 여부 확인
 
-        if (likeRepository.checkLike(post, user)) {
-            return;
+        if (likeRepository.checkLike(post, user)) { //이미 좋아요가 눌렸다면?
+            return; //종료
         }
-        post.like(user);
-        likeRepository.like(post, user);
+        post.like(user); //좋아요가 눌리지 않았다면 Like 버튼 활성화
+        likeRepository.like(post, user); // 특정 게시글의 리스트에 추가 Ex)1번 게시글 - 1번유저 Map구조로 저장
 
     }
 

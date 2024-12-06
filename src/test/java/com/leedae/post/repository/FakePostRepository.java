@@ -16,6 +16,8 @@ public class FakePostRepository implements PostRepository {
         if(pos.getId() != null){
             // 이미 존재하는
             store.put(pos.getId(),pos);
+            return pos;
+
         }
         long id = store.size() + 1;
         Post newPost = new Post(id,pos.getAuthor(),pos.getContentObject());

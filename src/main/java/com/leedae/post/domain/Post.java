@@ -6,6 +6,8 @@ import com.leedae.post.domain.content.PostContent;
 import com.leedae.post.domain.content.PostPublicationState;
 import com.leedae.user.domain.User;
 
+import java.util.Objects;
+
 public class Post {
 
     private final Long id;
@@ -78,5 +80,14 @@ public class Post {
         return content;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Post post)) return false;
+        return Objects.equals(getId(), post.getId());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
 }

@@ -7,6 +7,8 @@ import com.leedae.post.domain.content.CommentContent;
 import com.leedae.post.domain.content.Content;
 import com.leedae.user.domain.User;
 
+import java.util.Objects;
+
 public class Comment {
 
     private final Long id;
@@ -52,7 +54,7 @@ public class Comment {
     }
 
     public void updateComment(User user, String updateComment){
-        if(!this.equals(user)){
+        if(!author.equals(user)){
             throw new IllegalArgumentException();
         }
 
@@ -73,5 +75,20 @@ public class Comment {
 
     public Content getContent(){
         return content;
+    }
+
+    public String getContextText(){
+        return content.getContentText();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Comment comment)) return false;
+        return Objects.equals(getId(), comment.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
     }
 }

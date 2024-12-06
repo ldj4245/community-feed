@@ -6,6 +6,7 @@ import com.leedae.post.interfaces.LikeRepository;
 import com.leedae.user.domain.User;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,14 +28,13 @@ public class FakeLikeRepository implements LikeRepository {
 
     @Override
     public void like(Post post, User user) {
-        Set<User> users = postLikes.get(post);
 
-        if(user == null){
-            users = Set.of(user);
-        }else{
-            users.add(user);
+        Set<User> users = postLikes.get(post); //특정 게시글에 좋아요를 누른 유저들
+        if(users == null){
+            users = new HashSet<>();
         }
-        postLikes.put(post,users);
+        users.add(user);
+        postLikes.put(post,users);//게시글에 유저를 추가
     }
 
     @Override
@@ -64,10 +64,9 @@ public class FakeLikeRepository implements LikeRepository {
         Set<User> users = commentLikes.get(comment);
 
         if(users == null){
-            users = Set.of(user);
-        }else{
-            users.add(user);
+            users = new HashSet<>();
         }
+        users.add(user);
         commentLikes.put(comment,users);
 
 
