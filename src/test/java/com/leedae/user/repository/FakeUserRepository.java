@@ -5,7 +5,6 @@ import com.leedae.user.domain.User;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 
 public class FakeUserRepository implements UserRepository {
@@ -18,14 +17,14 @@ public class FakeUserRepository implements UserRepository {
             store.put(user.getId(),user);
         }
         Long id = store.size() + 1L;
-        User newUser = new User(id,user.getInfo());
+        User newUser = new User(id,user.getUserInfo());
         store.put(id,newUser);
 
         return newUser;
     }
 
     @Override
-    public Optional<User> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+    public User findById(Long id) {
+        return store.get(id);
     }
 }

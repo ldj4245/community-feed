@@ -46,8 +46,8 @@ public class UserRelationServiceTest {
 
 
         //Then
-        assertEquals(1,user1.followingCount());
-        assertEquals(1,user2.followerCount());
+        assertEquals(1,user1.getFollowingCount());
+        assertEquals(1,user2.getFollowerCount());
 
 
     }
@@ -72,10 +72,10 @@ public class UserRelationServiceTest {
 
 
         //when, then
-        assertEquals(0,user1.followerCount());
-        assertEquals(0,user1.followingCount());
-        assertEquals(0,user2.followerCount());
-        assertEquals(0,user2.followingCount());
+        assertEquals(0,user1.getFollowerCount());
+        assertEquals(0,user1.getFollowingCount());
+        assertEquals(0,user2.getFollowerCount());
+        assertEquals(0,user2.getFollowingCount());
 
 
 
