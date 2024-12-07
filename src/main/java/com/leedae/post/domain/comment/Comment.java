@@ -6,9 +6,15 @@ import com.leedae.post.domain.Post;
 import com.leedae.post.domain.content.CommentContent;
 import com.leedae.post.domain.content.Content;
 import com.leedae.user.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.util.Objects;
 
+@AllArgsConstructor
+@Getter
+@Builder
 public class Comment {
 
     private final Long id;
@@ -61,21 +67,11 @@ public class Comment {
         this.content.updateContent(updateComment);
     }
 
-    public Long getId() {
-        return id;
+    public Integer getLikeCount(){
+        return likeCount.getCount();
     }
 
-    public User getAuthor() {
-        return author;
-    }
 
-    public Post getPost() {
-        return post;
-    }
-
-    public Content getContent(){
-        return content;
-    }
 
     public String getContextText(){
         return content.getContentText();

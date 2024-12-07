@@ -4,8 +4,12 @@ import com.leedae.user.application.dto.CreateUserRequestDto;
 import com.leedae.user.application.interfaces.UserRepository;
 import com.leedae.user.domain.User;
 import com.leedae.user.domain.UserInfo;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.IllformedLocaleException;
+
+
 
 public class UserService {
 
@@ -14,6 +18,7 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
 
     public User createUser(CreateUserRequestDto dto){
         UserInfo info  = new UserInfo(dto.name(), dto.profileImageUrl());

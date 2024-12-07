@@ -12,13 +12,21 @@ repositories {
 }
 
 dependencies {
+
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+
+    implementation ("org.projectlombok:lombok")
+    annotationProcessor ("org.projectlombok:lombok")
+
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
+    runtimeOnly("com.mysql:mysql-connector-j")
 }
+
 
 tasks.test {
     useJUnitPlatform()

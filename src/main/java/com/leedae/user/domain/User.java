@@ -1,72 +1,84 @@
 package com.leedae.user.domain;
 
 import com.leedae.common.domain.PositiveIntegerCounter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.util.Objects;
 
+
+@Builder
+@AllArgsConstructor
+@Getter
 public class User {
-
     private final Long id;
-    private final UserInfo info;
+    private final UserInfo userInfo;
     private final PositiveIntegerCounter followingCount;
-    private final PositiveIntegerCounter followerCounter;
-
+    private final PositiveIntegerCounter followerCount;
 
     public User(Long id, UserInfo userInfo) {
-        if(userInfo == null){
-            throw new IllegalArgumentException();
+        if (userInfo == null) {
+            throw new IllegalArgumentException("UserInfo cannot be null");
         }
+
         this.id = id;
-        this.info = userInfo;
+        this.userInfo = userInfo;
         this.followingCount = new PositiveIntegerCounter();
-        this.followerCounter = new PositiveIntegerCounter();
+        this.followerCount = new PositiveIntegerCounter();
     }
 
-    public void follow(User targetUser){
-        if(this.equals(targetUser)){
-            throw new IllegalArgumentException();
+    public void follow(User followee) {
+        if (this.equals(followee)) {
+            throw new IllegalArgumentException("");
         }
 
         followingCount.increase();
-        targetUser.increaseFollowerCount();
+        followee.increaseFollowerCount();
     }
 
-    public void unfollow(User targetUser){
-        if(this.equals(targetUser)){
-            throw new IllegalArgumentException();
+    public void unfollow(User followee) {
+        if (this.equals(followee)) {
+            throw new IllegalArgumentException("");
         }
 
         followingCount.decrease();
-        targetUser.decreaseFollowerCount();
+        followee.decreaseFollowerCount();
     }
 
-    public void increaseFollowerCount(){
-        followerCounter.increase();
+    private void increaseFollowerCount() {
+        followerCount.increase();
     }
 
-    public void decreaseFollowerCount(){
-        followerCounter.decrease();
+    private void decreaseFollowerCount() {
+        followerCount.decrease();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public int followerCount(){
-        return followerCounter.getCount();
-    }
-
-    public int followingCount(){
+    public int getFollowingCount() {
         return followingCount.getCount();
     }
 
-    public UserInfo getInfo() {
-            return info;
+    public int getFollowerCount() {
+        return followerCount.getCount();
+    }
+
+    public String getName() {
+        return userInfo.getName();
+    }
+
+    public String getProfileImage() {
+        return userInfo.getProfileImageUrl();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof User user)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
         return Objects.equals(id, user.id);
     }
 

@@ -1,5 +1,9 @@
 package com.leedae.user.domain;
 
+
+import lombok.Getter;
+
+@Getter
 public class UserInfo {
 
     private final String name;
@@ -16,8 +20,4 @@ public class UserInfo {
         this.profileImageUrl = profileImageUrl;
     }
 
-
-    public String getName() {
-        return name;
-    }
 }
