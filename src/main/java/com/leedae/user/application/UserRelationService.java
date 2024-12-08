@@ -3,7 +3,10 @@ package com.leedae.user.application;
 import com.leedae.user.application.dto.FollowUserRequestDto;
 import com.leedae.user.application.interfaces.UserRelationRepository;
 import com.leedae.user.domain.User;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class UserRelationService {
     private final UserService userService;
     private final UserRelationRepository userRelationRepository;

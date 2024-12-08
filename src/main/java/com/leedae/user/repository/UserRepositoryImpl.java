@@ -26,6 +26,7 @@ public class UserRepositoryImpl implements UserRepository {
         UserEntity entity = jpaUserRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
 
+
         return entity.toUser();
 
     }

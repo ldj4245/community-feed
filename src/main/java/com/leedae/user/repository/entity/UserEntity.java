@@ -9,7 +9,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
+@DynamicUpdate //변경된 값들만 업데이트
 @Entity
 @Table(name = "community_user")
 @NoArgsConstructor

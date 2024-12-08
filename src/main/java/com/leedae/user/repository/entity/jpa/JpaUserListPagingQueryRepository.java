@@ -34,7 +34,7 @@ public class JpaUserListPagingQueryRepository {
                         relation.followerUserId.eq(userId),
                         hasLastData(lastFollowerId)
                 )
-                .orderBy()
+                .orderBy(user.id.desc())
                 .limit(20)
                 .fetch();
 
@@ -45,7 +45,7 @@ public class JpaUserListPagingQueryRepository {
             return null;
         }
 
-        return user.id.gt(lastId);
+        return user.id.lt(lastId);
     }
 
 }
