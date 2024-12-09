@@ -3,6 +3,7 @@ package com.leedae.post.application;
 import com.leedae.fake.FakeObjectFactory;
 import com.leedae.post.application.dto.CreatePostRequestDto;
 import com.leedae.post.application.dto.LikeRequestDto;
+import com.leedae.post.application.dto.UpdatePostRequestDto;
 import com.leedae.post.domain.Post;
 import com.leedae.post.domain.content.PostPublicationState;
 import com.leedae.user.application.UserService;
@@ -35,7 +36,8 @@ class PostServiceTest extends PostApplicationTestTemplate {
         Post post = postService.createPost(dto);
 
         // when
-        Post updatePost = postService.updatePost(post.getId(), dto);
+        UpdatePostRequestDto updatePostRequestDto = new UpdatePostRequestDto(user.getId(),"this is test content",PostPublicationState.PUBLIC);
+        Post updatePost = postService.updatePost(post.getId(), updatePostRequestDto);
 
         // Then
         assertEquals(post.getId(),updatePost.getId());

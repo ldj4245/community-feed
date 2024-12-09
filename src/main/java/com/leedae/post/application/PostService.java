@@ -2,6 +2,7 @@ package com.leedae.post.application;
 
 import com.leedae.post.application.dto.CreatePostRequestDto;
 import com.leedae.post.application.dto.LikeRequestDto;
+import com.leedae.post.application.dto.UpdatePostRequestDto;
 import com.leedae.post.domain.Post;
 import com.leedae.post.domain.content.Content;
 import com.leedae.post.domain.content.PostContent;
@@ -9,7 +10,9 @@ import com.leedae.post.interfaces.LikeRepository;
 import com.leedae.post.interfaces.PostRepository;
 import com.leedae.user.application.UserService;
 import com.leedae.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PostService {
 
     private final UserService userService; //유저의 정보없이 글 작성이 안되기때문에
@@ -23,7 +26,7 @@ public class PostService {
     }
 
     public Post getPost(Long id){
-        return postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Post not Found"));
+        return postRepository.findById(id);
     }
 
     public Post createPost(CreatePostRequestDto dto){
@@ -35,16 +38,17 @@ public class PostService {
 
     }
 
-    public Post updatePost(Long id, CreatePostRequestDto dto){
-        Post post = getPost(id);
-        User user = userService.getUser(dto.userId());
+    //id랑 글 쓴 유저와 내용,공개범위 받기
+    public Post updatePost(Long id, UpdatePostRequestDto dto){
+        Post post = getPost(id); //게시글 가져오기
+        User user = userService.getUser(dto.userId()); //유저 가져오기
 
-        post.updatePost(user, dto.content(),dto.state());
-        return postRepository.save(post);
+        post.updatePost(user, dto.content(),dto.state()); //업데이트 실행
+        return postRepository.save(post); //DB에 저장
     }
 
     public void likePost(LikeRequestDto dto) {
-        Post post = postRepository.findById(dto.targetId()).orElseThrow(); //게시글 존재 여부 확인
+        Post post = postRepository.findById(dto.targetId());//게시글 존재 여부 확인
         User user = userService.getUser(dto.userId()); //유저 존재 여부 확인
 
         if (likeRepository.checkLike(post, user)) { //이미 좋아요가 눌렸다면?
@@ -56,7 +60,7 @@ public class PostService {
     }
 
     public void unlikePost(LikeRequestDto dto){
-        Post post = postRepository.findById(dto.targetId()).orElseThrow();
+        Post post = postRepository.findById(dto.targetId());
         User user = userService.getUser(dto.userId());
 
         if(likeRepository.checkLike(post,user)){

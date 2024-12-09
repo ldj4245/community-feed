@@ -8,9 +8,15 @@ import com.leedae.post.domain.content.CommentContent;
 import com.leedae.post.repository.entity.post.PostEntity;
 import com.leedae.user.repository.entity.UserEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class CommentEntity extends TimeBaseEntity {
 
     @Id

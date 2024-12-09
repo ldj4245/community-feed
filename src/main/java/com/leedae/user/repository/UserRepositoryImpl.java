@@ -23,7 +23,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(Long id) {
-        UserEntity entity = jpaUserRepository.findById(id)
+        UserEntity entity = jpaUserRepository.findById(id) //jpaRepository를 통해 조회해서 엔티티가 없으면 IllegalException
                 .orElseThrow(IllegalArgumentException::new);
 
 

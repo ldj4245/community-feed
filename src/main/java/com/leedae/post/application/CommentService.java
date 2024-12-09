@@ -28,7 +28,7 @@ public class CommentService {
 
     public Comment getComment(Long id){
         System.out.println("id = " + id);
-        return commentRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return commentRepository.findById(id);
     }
 
     public Comment createComment(CreateCommentRequest dto){

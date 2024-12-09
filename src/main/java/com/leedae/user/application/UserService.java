@@ -29,7 +29,7 @@ public class UserService {
     }
 
     public User getUser(Long id){
-        return userRepository.findById(id);
+        return userRepository.findById(id); //db에서 조회
     }
 
     public GetUserResponseDto getUserProfile(Long id){
